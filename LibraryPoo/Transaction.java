@@ -19,6 +19,9 @@ public class Transaction {
         this.date = date;
     }
 
+    public Transaction() {
+    }
+
     public String getId() {
         return id;
     }
@@ -59,24 +62,53 @@ public class Transaction {
         this.date = date;
     }
 
-    public String generateUIDD() {
+    public void transaction(String type, Client client, Book book) {
+        if (type.equals("borrow"))
+            this.borrowABookByBook(client, book);
+        if (type.equals("return"))
+            this.returnABookByBook(client, book);
+    }
+
+    public static String generateUIDD() {
         UUID uuid = UUID.randomUUID();
         String uuidAsString = uuid.toString();
         return uuidAsString;
     }
 
-    public void borrowABook(Client client, Book book) {
-        if (book.getIsAvailable() == true) {
-            client.borrowedBooks.add(book);
+    public void borrowABookByBook(Client client, Book book) {
+        if (book.getIsAvailable() == true && client.getBorrowedBooks().size() < 3
+                && BookRepository.getBooks().contains(book)) {
+            client.getBorrowedBooks().add(book);
             book.setIsAvailable(false);
         } else {
             System.out.println("Cant borrow this book");
         }
     }
 
-    public void returnABook(int index) {
-        client.borrowedBooks.remove(index);
-        book.setIsAvailable(false);
+    public void borrowABookByIndex(Client client, int index) {
+        if (BookRepository.getBookByIndex(index).getIsAvailable() == true && client.getBorrowedBooks().size() < 3) {
+            client.getBorrowedBooks().add(BookRepository.getBookByIndex(index));
+            BookRepository.getBookByIndex(index).setIsAvailable(false);
+        } else {
+            System.out.println("Cant borrow this book");
+        }
+    }
+
+    public void returnABookByIndex(int index, Client client) {
+        if (client.getBorrowedBooks().contains(BookRepository.getBookByIndex(index))) {
+            client.getBorrowedBooks().remove(BookRepository.getBookByIndex(index));
+            BookRepository.getBookByIndex(index).setIsAvailable(false);
+        }
+
+    }
+
+    public void returnABookByBook(Client client, Book book) {
+        if (client.getBorrowedBooks().contains(book) == true) {
+            book.setIsAvailable(true);
+            client.getBorrowedBooks().remove(book);
+        } else {
+            System.out.println("Can't return that book");
+        }
     }
 
 }

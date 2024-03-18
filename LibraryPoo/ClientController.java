@@ -5,28 +5,29 @@ public class ClientController {
     Scanner sc = new Scanner(System.in);
 
     public void modifyClient() {
-        System.out.print("Type the index: ");
-        int index = sc.nextInt();
-        System.out.print("Type name: ");
-        String name = sc.nextLine();
-        System.out.print("Type lastname: ");
-        String lastname = sc.nextLine();
-        System.out.print("Year: ");
-        int year = sc.nextInt();
-        System.out.print("Month: ");
-        int month = sc.nextInt();
-        System.out.print("Day: ");
-        int day = sc.nextInt();
-        sc.nextLine();
-        @SuppressWarnings("deprecation")
-        Date birthDay = new Date(year - 1900, month - 1, day);
+        int index = AskData.askIndex();
+        String name = AskData.askName();
+        String lastname = AskData.askLastname();
+        Date birthDay = AskData.askDate();
         ClientRepository.modifyClient(index, name, lastname, birthDay);
     }
 
     public void deleteCient() {
-        System.out.print("Type the index: ");
-        int index = sc.nextInt();
+        int index = AskData.askIndex();
         ClientRepository.deleteCient(index);
+    }
+
+    public void createClient() {
+        String name = AskData.askName();
+        String lastname = AskData.askLastname();
+        Date birthDay = AskData.askDate();
+        Profile profile = new Profile(name, lastname, birthDay);
+        Client client = new Client(profile);
+        ClientRepository.createClient(client);
+    }
+
+    public void printCLient() {
+        ClientRepository.printAllClients();
     }
 
 }

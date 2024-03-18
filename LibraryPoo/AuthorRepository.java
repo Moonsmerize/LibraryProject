@@ -14,21 +14,21 @@ public class AuthorRepository {
 
         public static void printAllAuthors() {
                 System.out.printf(
-                                "----------------------------------------------------------------------\n");
+                                "-----------------------------------------------------------\n");
                 System.out.printf(
-                                "                                  Authors                             \n");
+                                "|                        Authors                          |\n");
                 System.out.printf(
-                                "----------------------------------------------------------------------\n");
-                System.out.printf("| %18s | %20s | %8s |\n", "Name", "Last name", "Birthday");
+                                "-----------------------------------------------------------\n");
+                System.out.printf("| %18s | %20s | %11s |\n", "Name", "Last name", "Birthday");
                 System.out.printf(
-                                "----------------------------------------------------------------------\n");
+                                "-----------------------------------------------------------\n");
                 for (Author author : authors) {
                         System.out.printf("| %18s | %20s | %8s |\n", author.getProfile().getName(),
                                         author.getProfile().getLastName(),
                                         Formatter.Formatt(author.getProfile().getBirthdate()));
                 }
                 System.out.printf(
-                                "----------------------------------------------------------------------\n");
+                                "-----------------------------------------------------------\n");
         }
 
         public static ArrayList<Author> getAuthors() {
@@ -40,8 +40,11 @@ public class AuthorRepository {
         }
 
         public static Author getAuthorByIndex(int index) {
-            return authors.get(index);             
+                return authors.get(index);
         }
 
-        
+        public void addBookToAuthor(Book book) {
+
+        }
+
 }

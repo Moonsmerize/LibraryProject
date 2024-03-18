@@ -1,31 +1,35 @@
+
 import java.util.Date;
 import java.util.Scanner;
 
 public class BookController {
-    
-    Scanner sc = new Scanner(System.in);   
+
+    Scanner sc = new Scanner(System.in);
 
     public void createBook() {
-        System.out.print("Type de isbn: ");
-        String isbn = sc.nextLine();
-        System.out.print("Type de title: ");
-        String title = sc.nextLine();
+        String isbn = AskData.askIsbn();
+        String title = AskData.title();
         AuthorRepository.printAllAuthors();
-        System.out.println("Author's index");
-        int index = sc.nextInt();
-        System.out.print("Is available?: ");
-        Boolean isAvailable = sc.nextBoolean();
-        System.out.print("year: ");
-        int year = sc.nextInt();
-        System.out.print("Month: ");
-        int month = sc.nextInt();
-        System.out.print("Day: ");
-        int day = sc.nextInt();
-        sc.nextLine();
-        @SuppressWarnings("deprecation")
-        Date publishDate = new Date(year - 1900, month - 1, day);
+        int index = AskData.askIndex();
+        Date publishDate = AskData.askDate();
+        boolean isAvailable = AskData.askIsAvailable();
         Book book = new Book(isbn, title, AuthorRepository.getAuthorByIndex(index), publishDate, isAvailable);
+        AuthorRepository.getAuthorByIndex(index).addBookToAuthor(book, index);
         BookRepository.addBook(book);
+    }
+
+    public void deleteBookByIndex() {
+        int index = AskData.askIndex();
+        BookRepository.deleteBookByIndex(index);
+    }
+
+    public void modifyBookByIndex() {
+        int index = AskData.askIndex();
+        BookRepository.deleteBookByIndex(index);
+    }
+
+    public void printBooks() {
+        BookRepository.printAllBooks();
     }
 
 }

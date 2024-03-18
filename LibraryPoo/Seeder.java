@@ -31,13 +31,17 @@ public class Seeder {
         Author autor3 = new Author(authorProfile3);
         Author autor4 = new Author(authorProfile4);
         Author autor5 = new Author(authorProfile5);
+        AuthorRepository.addAuthor(autor1);
+        AuthorRepository.addAuthor(autor2);
+        AuthorRepository.addAuthor(autor3);
+        AuthorRepository.addAuthor(autor4);
+        AuthorRepository.addAuthor(autor5);
 
         Book libro1 = new Book("ISBN123", "Libro1", autor1, new Date(), true);
         Book libro2 = new Book("ISBN234", "Libro2", autor2, new Date(), true);
-        Book libro3 = new Book("ISBN656", "Libro3", autor3, new Date(), false);
+        Book libro3 = new Book("ISBN656", "Libro3", autor3, new Date(), true);
         Book libro4 = new Book("ISBN954", "Libro4", autor4, new Date(), true);
         Book libro5 = new Book("ISBN154", "Libro5", autor5, new Date(), true);
-
         BookRepository.addBook(libro1);
         BookRepository.addBook(libro2);
         BookRepository.addBook(libro3);
@@ -46,6 +50,18 @@ public class Seeder {
 
         BookRepository.printAllBooks();
         ClientRepository.printAllClients();
+        AuthorRepository.printAllAuthors();
+
+        Transaction transaction = new Transaction();
+        System.out.println("lets borrow 3 books");
+        transaction.transaction("borrow", client5, libro5);
+        transaction.transaction("borrow", client5, libro3);
+        transaction.transaction("borrow", client5, libro2);
+        ClientRepository.printClientBorrowedBooks(client5);
+        System.out.println("returned book 5");
+        transaction.transaction("return", client5, libro5);
+        BookRepository.printAllBooks();
+        ClientRepository.printClientBorrowedBooks(client5);
 
     }
 

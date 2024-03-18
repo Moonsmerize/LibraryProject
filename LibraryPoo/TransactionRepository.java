@@ -18,7 +18,7 @@ public class TransactionRepository {
         transactions.add(transaction);
     }
 
-    public void deleteTransactionByIndex(Transaction transaction, int index){
+    public void deleteTransactionByIndex(Transaction transaction, int index) {
         transactions.remove(index);
     }
 

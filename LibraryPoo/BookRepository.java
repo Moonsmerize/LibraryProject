@@ -16,11 +16,15 @@ public class BookRepository {
                 }
         }
 
+        public static Book getBookByIndex(int index) {
+                return books.get(index);
+        }
+
         public static void printAllBooks() {
                 System.out.printf(
                                 "---------------------------------------------------------------------------------------------------\n");
                 System.out.printf(
-                                "                                           BOOKS                                           \n");
+                                "|                                          BOOKS                                                  |\n");
                 System.out.printf(
                                 "---------------------------------------------------------------------------------------------------\n");
                 System.out.printf("| %18s | %20s | %20s | %15s | %10s |\n", "ISBN", "TITLE", "AUTHOR", "PUBLISH DATE",
@@ -34,7 +38,7 @@ public class BookRepository {
                                         Formatter.Formatt(book.getPublishDate()), book.getIsAvailable());
                 }
                 System.out.printf(
-                                "---------------------------------------------------------------------------------------------------\n");
+                                "---------------------------------------------------------------------------------------------------\n\n");
         }
 
         public static void printAvailableBooks() {
@@ -61,10 +65,6 @@ public class BookRepository {
                                 "---------------------------------------------------------------------------------------------------\n");
         }
 
-        public static Book getBookByIndex(int index) {
-                return books.get(index);
-        }
-
         public static void printBorrowedBooks() {
                 System.out.printf(
                                 "---------------------------------------------------------------------------------------------------\n");
@@ -87,5 +87,13 @@ public class BookRepository {
                 }
                 System.out.printf(
                                 "---------------------------------------------------------------------------------------------------\n");
+        }
+
+        public static ArrayList<Book> getBooks() {
+                return books;
+        }
+
+        public static void setBooks(ArrayList<Book> books) {
+                BookRepository.books = books;
         }
 }

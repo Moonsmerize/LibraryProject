@@ -19,7 +19,7 @@ public class ClientRepository {
         System.out.printf(
                 "-------------------------------------------------------------\n");
         System.out.printf(
-                "                            Clients                          \n");
+                "|                           Clients                         |\n");
         System.out.printf(
                 "-------------------------------------------------------------\n");
         System.out.printf("| %18s | %20s | %13s |\n", "Name", "Last name", "Birthday");
@@ -44,6 +44,32 @@ public class ClientRepository {
 
     public Client getClientByIndex(int index) {
         return clients.get(index);
+    }
+
+    public static void printClientBorrowedBooks(Client client) {
+        if (!client.getBorrowedBooks().isEmpty()) {
+            System.out.printf(
+                    "---------------------------------------------------------------------------------------------------\n");
+            System.out.printf(
+                    "                                        Client borrowed books                                      \n");
+            System.out.printf(
+                    "---------------------------------------------------------------------------------------------------\n");
+            System.out.printf("| %18s | %20s | %20s | %15s | %10s |\n", "ISBN", "TITLE", "AUTHOR", "PUBLISH DATE",
+                    "AVAILABLE");
+            System.out.printf(
+                    "---------------------------------------------------------------------------------------------------\n");
+            for (Book book : client.getBorrowedBooks()) {
+                System.out.printf("| %18s | %20s | %20s | %15s | %10s |\n", book.getIsbn(),
+                        book.getTitle(),
+                        book.getAuthor().getProfile().getName() + " "
+                                + book.getAuthor().getProfile().getLastName(),
+                        Formatter.Formatt(book.getPublishDate()), book.getIsAvailable());
+            }
+            System.out.printf(
+                    "---------------------------------------------------------------------------------------------------\n");
+        } else {
+            System.out.println("None to show");
+        }
     }
 
 }
