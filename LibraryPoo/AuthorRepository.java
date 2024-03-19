@@ -25,7 +25,7 @@ public class AuthorRepository {
                 for (Author author : authors) {
                         System.out.printf("| %18s | %20s | %8s |\n", author.getProfile().getName(),
                                         author.getProfile().getLastName(),
-                                        Formatter.Formatt(author.getProfile().getBirthdate()));
+                                        DateFormatter.Formatt(author.getProfile().getBirthdate()));
                 }
                 System.out.printf(
                                 "-----------------------------------------------------------\n");

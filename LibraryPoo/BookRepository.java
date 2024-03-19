@@ -35,7 +35,7 @@ public class BookRepository {
                         System.out.printf("| %18s | %20s | %20s | %15s | %10s |\n", book.getIsbn(), book.getTitle(),
                                         book.getAuthor().getProfile().getName() + " "
                                                         + book.getAuthor().getProfile().getLastName(),
-                                        Formatter.Formatt(book.getPublishDate()), book.getIsAvailable());
+                                        DateFormatter.Formatt(book.getPublishDate()), book.getIsAvailable());
                 }
                 System.out.printf(
                                 "---------------------------------------------------------------------------------------------------\n\n");
@@ -58,7 +58,7 @@ public class BookRepository {
                                                 book.getTitle(),
                                                 book.getAuthor().getProfile().getName() + " "
                                                                 + book.getAuthor().getProfile().getLastName(),
-                                                Formatter.Formatt(book.getPublishDate()), book.getIsAvailable());
+                                                DateFormatter.Formatt(book.getPublishDate()), book.getIsAvailable());
                         }
                 }
                 System.out.printf(
@@ -82,7 +82,7 @@ public class BookRepository {
                                                 book.getTitle(),
                                                 book.getAuthor().getProfile().getName() + " "
                                                                 + book.getAuthor().getProfile().getLastName(),
-                                                Formatter.Formatt(book.getPublishDate()), book.getIsAvailable());
+                                                DateFormatter.Formatt(book.getPublishDate()), book.getIsAvailable());
                         }
                 }
                 System.out.printf(

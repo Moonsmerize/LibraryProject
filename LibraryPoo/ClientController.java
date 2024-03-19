@@ -14,7 +14,7 @@ public class ClientController {
 
     public void deleteCient() {
         int index = AskData.askIndex();
-        ClientRepository.deleteCient(index);
+        ClientRepository.deleteClientByIndex(index);
     }
 
     public void createClient() {
