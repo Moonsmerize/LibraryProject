@@ -14,21 +14,32 @@ public class AuthorRepository {
 
         public static void printAllAuthors() {
                 System.out.printf(
-                                "-----------------------------------------------------------\n");
+                                "----------------------------------------------------------------------------------\n");
                 System.out.printf(
-                                "|                        Authors                          |\n");
+                                "|                                     Authors                                    |\n");
                 System.out.printf(
-                                "-----------------------------------------------------------\n");
-                System.out.printf("| %18s | %20s | %11s |\n", "Name", "Last name", "Birthday");
+                                "----------------------------------------------------------------------------------\n");
+                System.out.printf("| %18s | %20s | %11s | %20s |\n", "Name", "Last name", "Birthday", "written books");
                 System.out.printf(
-                                "-----------------------------------------------------------\n");
+                                "----------------------------------------------------------------------------------\n");
                 for (Author author : authors) {
-                        System.out.printf("| %18s | %20s | %8s |\n", author.getProfile().getName(),
+                        System.out.printf("| %18s | %20s | %11s | %20s |\n", author.getProfile().getName(),
                                         author.getProfile().getLastName(),
-                                        DateFormatter.Formatt(author.getProfile().getBirthdate()));
+                                        DateFormatter.Formatt(author.getProfile().getBirthdate()), " ");
+                        for (Book book : BookRepository.getBooks()) {
+                                if (book.getAuthor().getProfile().getName().equals(author.getProfile().getName())
+                                                && book.getAuthor().getProfile().getLastName()
+                                                                .equals(author.getProfile().getLastName())) {
+                                        System.out.printf("| %18s | %20s | %11s | %20s |\n", " ", " ", " ",
+                                                        book.getTitle());
+
+                                }
+
+                        }
+                        System.out.printf(
+                                        "----------------------------------------------------------------------------------\n");
                 }
-                System.out.printf(
-                                "-----------------------------------------------------------\n");
+
         }
 
         public static ArrayList<Author> getAuthors() {

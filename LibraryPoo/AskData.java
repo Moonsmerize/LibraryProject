@@ -6,14 +6,25 @@ public class AskData {
     static Scanner sc = new Scanner(System.in);
 
     public static String askName() {
+        System.out.print("Type the name: ");
         String name = sc.nextLine();
         return name;
     }
 
     public static String askLastname() {
-        System.out.print("Type the name: ");
+        System.out.print("Type the lastname: ");
         String lastname = sc.nextLine();
         return lastname;
+    }
+
+    public static byte askOption() {
+        System.out.print("Type the option: ");
+        byte option = sc.nextByte();
+        return option;
+    }
+
+    public static void bufferCleaner() {
+        sc.nextLine();
     }
 
     public static String askIsbn() {

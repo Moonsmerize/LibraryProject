@@ -20,6 +20,15 @@ public class BookRepository {
                 return books.get(index);
         }
 
+        public static Book getBookByIsbn(String isbn) {
+                for (Book book : books) {
+                        if (book.getIsbn().equals(isbn)) {
+                                return book;
+                        }
+                }
+                return null;
+        }
+
         public static void printAllBooks() {
                 System.out.printf(
                                 "---------------------------------------------------------------------------------------------------\n");
@@ -45,7 +54,7 @@ public class BookRepository {
                 System.out.printf(
                                 "---------------------------------------------------------------------------------------------------\n");
                 System.out.printf(
-                                "                                           BOOKS                                           \n");
+                                "                                           Available Books                                \n");
                 System.out.printf(
                                 "---------------------------------------------------------------------------------------------------\n");
                 System.out.printf("| %18s | %20s | %20s | %15s | %10s |\n", "ISBN", "TITLE", "AUTHOR", "PUBLISH DATE",
@@ -95,5 +104,23 @@ public class BookRepository {
 
         public static void setBooks(ArrayList<Book> books) {
                 BookRepository.books = books;
+        }
+
+        public static boolean checkAvailableBooks() {
+                for (Book book : books) {
+                        if (book.getIsAvailable() == true) {
+                                return true;
+                        }
+                }
+                return false;
+        }
+
+        public static boolean checkBookExist(String isbn) {
+                for (Book book : books) {
+                        if (book.getIsbn().equals(isbn) && book.getIsAvailable() == true) {
+                                return true;
+                        }
+                }
+                return false;
         }
 }

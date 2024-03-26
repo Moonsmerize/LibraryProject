@@ -42,7 +42,7 @@ public class ClientRepository {
                 }
         }
 
-        public Client getClientByIndex(int index) {
+        public static Client getClientByIndex(int index) {
                 return clients.get(index);
         }
 
@@ -51,7 +51,10 @@ public class ClientRepository {
                         System.out.printf(
                                         "---------------------------------------------------------------------------------------------------\n");
                         System.out.printf(
-                                        "|                                       Client borrowed books                                     |\n");
+                                        "|                             Client "
+                                                        + client.getProfile().getName()
+                                                        + " " + client.getProfile().getLastName() + " borrowed books"
+                                                        + "                             |\n");
                         System.out.printf(
                                         "---------------------------------------------------------------------------------------------------\n");
                         System.out.printf("| %18s | %20s | %20s | %15s | %10s |\n", "ISBN", "TITLE", "AUTHOR",
@@ -71,6 +74,47 @@ public class ClientRepository {
                 } else {
                         System.out.println("None to show");
                 }
+        }
+
+        public static Client getClientByNameAndLastname(String name, String lastname) {
+                for (Client client : clients) {
+                        if (client.getProfile().getName().equals(name)
+                                        && client.getProfile().getLastName().equals(lastname)) {
+                                return client;
+                        }
+                }
+                return null;
+        }
+
+        public static void printAvailableClients() {
+                System.out.printf(
+                                "-------------------------------------------------------------\n");
+                System.out.printf(
+                                "|                           Clients                         |\n");
+                System.out.printf(
+                                "-------------------------------------------------------------\n");
+                System.out.printf("| %18s | %20s | %13s |\n", "Name", "Last name", "Birthday");
+                System.out.printf(
+                                "-------------------------------------------------------------\n");
+                for (Client client : clients) {
+                        if (client.borrowedBooks.size() < 3) {
+                                System.out.printf("| %18s | %20s | %13s |\n", client.getProfile().getName(),
+                                                client.getProfile().getLastName(),
+                                                DateFormatter.Formatt(client.getProfile().getBirthdate()));
+                        }
+                }
+                System.out.printf(
+                                "-------------------------------------------------------------\n\n");
+        }
+
+        public static boolean checkClientExist(String name, String lastname) {
+                for (Client client : clients) {
+                        if (client.getProfile().getName().equals(name)
+                                        && client.getProfile().getLastName().equals(lastname)) {
+                                return true;
+                        }
+                }
+                return false;
         }
 
 }
